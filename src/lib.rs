@@ -1,5 +1,32 @@
-pub fn add(left: usize, right: usize) -> usize {
-    left + right
+use pyo3::prelude::*;
+use ulid::Ulid;
+
+use crate::ulid_trait::UlidTrait;
+
+mod ulid_trait;
+
+
+#[pyfunction]
+pub fn gen_ulid_str() -> String {
+    return Ulid::gen_ulid_str();
+}
+
+#[pymodule]
+fn ulid_rs(_py: Python, m: &PyModule) -> PyResult<()> {
+    m.add_function(wrap_pyfunction!(gen_ulid_str, m)?)?;
+
+    Ok(())
+}
+
+fn test_ulid() {
+
+    // Generate a string for a ulid
+    let s = gen_ulid_str();
+    println!("{}", s);
+
+    // Create from a String
+    let res = Ulid::get_ulid_from_string(&s);
+    // assert_eq!(ulid, res.unwrap());
 }
 
 #[cfg(test)]
@@ -8,7 +35,7 @@ mod tests {
 
     #[test]
     fn it_works() {
-        let result = add(2, 2);
-        assert_eq!(result, 4);
+        test_ulid()
+        // assert_eq!(result, 4);
     }
 }

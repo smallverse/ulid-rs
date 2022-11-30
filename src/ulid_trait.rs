@@ -1,16 +1,17 @@
+use pyo3::{Py, PyAny, PyObject, Python, ToPyObject};
 use ulid::{DecodeError, Ulid};
 
 pub trait UlidTrait {
+    fn to_object(&self, py: Python<'_>) -> PyObject;
     fn gen_ulid_str() -> String;
-    fn get_ulid_from_string(s: &str) -> Result<Ulid, DecodeError>;
 }
 
 impl UlidTrait for Ulid {
-    fn gen_ulid_str() -> String {
-        return Ulid::new().to_string();
+    fn to_object(&self, py: Python<'_>) -> PyObject {
+        self.to_object(py)
     }
 
-    fn get_ulid_from_string(s: &str) -> Result<Ulid, DecodeError> {
-        return Ulid::from_string(&s);
+    fn gen_ulid_str() -> String {
+        Ulid::new().to_string()
     }
 }

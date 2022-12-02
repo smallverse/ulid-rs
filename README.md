@@ -1,9 +1,15 @@
-# ulid-rs
-develop 
+# ulid-rs for python by pyo3
+
+pip https://pypi.org/project/ulid-rs/
+
+ulid-rs https://github.com/dylanhart/ulid-rs
+
+## develop & test
+develop
 ```shell
 maturin develop
 ```
-test
+ test
 ```shell
 python
 >>> import ulid_rs
@@ -12,4 +18,16 @@ python
 >>> 
 
 
+```
+
+## build and publish
+build
+```shell
+#maturin build
+maturin build -f -r
+
+```
+publish
+```shell
+maturin publish
 ```

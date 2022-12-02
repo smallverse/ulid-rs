@@ -11,6 +11,7 @@ pub fn gen_ulid_str() -> String {
     return Ulid::gen_ulid_str();
 }
 
+
 #[pymodule]
 fn ulid_rs(_py: Python, m: &PyModule) -> PyResult<()> {
     m.add_function(wrap_pyfunction!(gen_ulid_str, m)?)?;
@@ -24,9 +25,7 @@ fn test_ulid() {
     let s = gen_ulid_str();
     println!("{}", s);
 
-    // Create from a String
-    let res = Ulid::get_ulid_from_string(&s);
-    // assert_eq!(ulid, res.unwrap());
+
 }
 
 #[cfg(test)]
